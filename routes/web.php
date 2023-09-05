@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*Agrgamos una ruta de contacto */
+Route::get('/contacto', function () {
+    return view('contacto');
+});
