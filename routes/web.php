@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Contacto;
-use Illuminate\Http\Request;
+use App\Http\Controllers\SitioController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,24 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Agrgamos una ruta de contacto */
-Route::get('/contacto/{tipo?}', function ($tipo = null) {
-    /*dd($tipo);*/
-    return view('contacto', compact('tipo'));
-    /*return view('contacto')->with(['tipo' => $tipo]);*/
-
-});
-
-Route::post('/validar-contacto', function (Request $request) {
-    /*dd($request->correo);*/
-    $contacto = new Contacto(); /*Instancia del modelo contacto*/
-    $contacto->correo = $request -> correo;
-    $contacto->comentario = $request -> comentario;
-    /*Los timestamps se ponen en automático*/
-    $contacto->save();
-    
-    return redirect()->back();
-});
+/* */
+Route::get('/contacto/{tipo?}',[SitioController::class, 'contactoForm']);
+Route::post('/validar-contacto', [SitioController::class, 'contactoSave']);
 
 
 
